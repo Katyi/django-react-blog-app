@@ -4,7 +4,7 @@ declare global {
     title: string;
     slug: string;
     content: string;
-    featured_image: string;
+    featured_image?: FileList | string;
     category?: string;
     author: {
       username: string;

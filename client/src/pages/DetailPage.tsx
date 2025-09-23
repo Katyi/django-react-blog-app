@@ -53,7 +53,7 @@ const DetailPage = ({ username, isAuthenticated }: DetailPageProps) => {
   function handleDeleteBlog() {
     const toastId = toast(
       <div>
-        <p>Are you sure you want to delete this post?</p>
+        <p>Вы уверены, что хотите удалить этот пост?</p>
         <div className="flex gap-2 mt-2">
           <button
             onClick={() => {
@@ -62,21 +62,19 @@ const DetailPage = ({ username, isAuthenticated }: DetailPageProps) => {
             }}
             className="bg-red-500 text-white px-3 py-1 rounded"
           >
-            Yes
+            Да
           </button>
           <button
             onClick={() => toast.dismiss(toastId)}
             className="bg-gray-500 text-white px-3 py-1 rounded"
           >
-            No
+            Нет
           </button>
         </div>
       </div>,
       { autoClose: false }
     );
   }
-
-  
 
   if (isPending) {
     return <Spinner />;

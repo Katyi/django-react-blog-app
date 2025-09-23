@@ -48,21 +48,23 @@ const LoginPage = ({ setIsAuthenticated, setUsername }: LoginPageProps) => {
     dark:text-white dark:bg-[#141624]"
     >
       <div className="flex flex-col gap-2 justify-center items-center mb-2">
-        <h3 className="font-semibold text-2xl">Signin Form</h3>
-        <p>Welcome back! Log in to continue.</p>
+        <h3 className="font-semibold text-2xl">Войти</h3>
+        <p>С возвращением! Войдите, чтобы продолжить.</p>
       </div>
 
       {/* USERNAME */}
       <div>
         <Label htmlFor="username" className="dark:text-[97989F]">
-          Username
+          Имя пользователя
         </Label>
         <Input
           type="text"
           id="username"
           disabled={mutation.isPending}
-          placeholder="Enter username"
-          {...register('username', { required: 'Username is required' })}
+          placeholder="Введите имя пользователя"
+          {...register('username', {
+            required: 'Имя пользователя обязательно',
+          })}
           className="mt-1 border-2 border-[#141624] dark:border-[#3B3C4A] focus:outline-0 h-[40px] w-[300px]"
         />
         <p className="h-3 leading-[10px] text-[10px] my-0.5">
@@ -74,12 +76,12 @@ const LoginPage = ({ setIsAuthenticated, setUsername }: LoginPageProps) => {
 
       {/* PASSWORD */}
       <div>
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">Пароль</Label>
         <Input
           type="password"
           id="password"
           disabled={mutation.isPending}
-          placeholder="Enter password"
+          placeholder="Введите пароль"
           {...register('password', { required: 'Password is required' })}
           className="mt-1 border-2 border-[#141624] dark:border-[#3B3C4A] focus:outline-0 h-[40px]  w-[300px]"
         />
@@ -99,14 +101,14 @@ const LoginPage = ({ setIsAuthenticated, setUsername }: LoginPageProps) => {
           {mutation.isPending ? (
             <>
               {' '}
-              <SmallSpinner /> <SmallSpinnerText text="Logging in..." />
+              <SmallSpinner /> <SmallSpinnerText text="Вход..." />
             </>
           ) : (
-            <SmallSpinnerText text="Signin" />
+            <SmallSpinnerText text="Войти" />
           )}
         </button>
         <p className="text-[14px]">
-          Don't have an account? <Link to="/signup">signup</Link>
+          Нет аккаунта? Зарегистрируйтесь <Link to="/signup">Регистрация</Link>
         </p>
       </div>
     </form>

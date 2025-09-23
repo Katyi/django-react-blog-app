@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth import get_user_model
 from .serializers import UserRegistrationSerializer, BlogSerializer, UpdateUserProfileSerializer, UserInfoSerializer
-
+import os
 
 class BlogListPagination(PageNumberPagination):
     page_size = 6  # Number of results per page
@@ -49,9 +49,24 @@ def register_user(request):
 @permission_classes([IsAuthenticated])
 def update_user_profile(request):
     user = request.user
+
+    # Сохраняем путь к старому файлу профиля
+    old_profile_path = user.profile_picture.path if user.profile_picture else None
+
     serializer = UpdateUserProfileSerializer(user, data=request.data)
     if serializer.is_valid():
+        # Проверяем, изменилось ли изображение профиля
+        new_profile_image = request.FILES.get('profile_picture')
+
         serializer.save()
+
+        # Удаляем старое изображение профиля только если загружено новое
+        if new_profile_image and old_profile_path and os.path.exists(old_profile_path):
+            try:
+                os.remove(old_profile_path)
+            except OSError:
+                pass  # Игнорируем ошибки удаления файла
+                
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -73,11 +88,27 @@ def create_blog(request):
 def update_blog(request, pk):
     user = request.user
     blog = Blog.objects.get(pk=pk)
+    
     if blog.author != user:
         return Response({"error": "You are not the author of this blog"}, status=403)
+    
+    # Сохраняем путь к старому файлу
+    old_image_path = blog.featured_image.path if blog.featured_image else None
+    
     serializer = BlogSerializer(blog, data=request.data)
     if serializer.is_valid():
+        # Проверяем, изменилось ли изображение
+        new_image = request.FILES.get('featured_image')
+
         serializer.save()
+
+        # Удаляем старое изображение только если загружено новое
+        if new_image and old_image_path and os.path.exists(old_image_path):
+            try:
+                os.remove(old_image_path)
+            except OSError:
+                pass  # Игнорируем ошибки удаления файла
+
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

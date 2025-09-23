@@ -47,7 +47,7 @@ const AppLayout = ({
         />
         <ToastContainer />
         <Outlet />
-        <Footer />
+        <Footer username={username} />
       </main>
     </div>
   );

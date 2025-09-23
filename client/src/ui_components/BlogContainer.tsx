@@ -10,7 +10,7 @@ interface BlogContainerProps {
 const BlogContainer = ({
   isPending,
   blogs = [],
-  title = '🍔Latest Posts',
+  title = 'Публикации',
 }: BlogContainerProps) => {
   if (isPending) {
     return <Spinner />;

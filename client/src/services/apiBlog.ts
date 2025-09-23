@@ -64,7 +64,7 @@ export async function createBlog(data: FormData) {
 
 export async function updateBlog(data: FormData, id: number) {
   try {
-    const response = await api.put(`update_blog/${id}`, data);
+    const response = await api.put(`update_blog/${id}/`, data);
     return response.data;
   } catch (err) {
     throw new Error(err instanceof Error ? err.message : 'An error occurred');

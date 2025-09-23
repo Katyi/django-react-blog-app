@@ -21,12 +21,11 @@ class CustomUser(AbstractUser):
 
 
 class Blog(models.Model):
-
-    CATEGORY = (("Frontend", "Frontend"),
-                ("Backend", "Backend"),
-                ("Fullstack", "Fullstack"),
-                ("Web3", "Web3"),
-                ("Design", "Design")
+    CATEGORY = (("Жизнь", "Жизнь"),
+                ("Здоровье", "Здоровье"),
+                ("Красота", "Красота"),
+                ("Развлечения", "Развлечения"),
+                ("Стиль", "Стиль")
                 )
 
     title = models.CharField(max_length=255)

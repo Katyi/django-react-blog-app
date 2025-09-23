@@ -33,8 +33,11 @@ const NavBar = ({
   return (
     <>
       <nav className="max-container padding-x py-6 flex justify-between items-center  gap-6 sticky top-0 z-10 bg-[#FFFFFF] dark:bg-[#141624]">
-        <Link to="/" className="text-[#141624] text-2xl dark:text-[#FFFFFF]">
-          DevScribe
+        <Link
+          to="/"
+          className="text-[#141624] text-2xl font-bold dark:text-[#FFFFFF]"
+        >
+          ПРОСТО БЛОГ
         </Link>
         <ul className="flex items-center  justify-end gap-9 text-[#3B3C4A] lg:flex-1 max-md:hidden dark:text-[#FFFFFF]">
           {isAuthenticated ? (
@@ -44,11 +47,11 @@ const NavBar = ({
                   to={`/profile/${username}`}
                   className={({ isActive }) => (isActive ? 'active' : '')}
                 >
-                  Hi, {username}
+                  Привет, {username}
                 </NavLink>
               </li>
               <li onClick={logout} className="cursor-pointer">
-                Logout
+                Выйти
               </li>
             </>
           ) : (
@@ -58,7 +61,7 @@ const NavBar = ({
                   to="/signin"
                   className={({ isActive }) => (isActive ? 'active' : '')}
                 >
-                  Login
+                  Войти
                 </NavLink>
               </li>
 
@@ -67,7 +70,7 @@ const NavBar = ({
                   to="/signup"
                   className={({ isActive }) => (isActive ? 'active' : '')}
                 >
-                  Register
+                  Регистрация
                 </NavLink>
               </li>
             </>
@@ -78,7 +81,7 @@ const NavBar = ({
               to="/create"
               className={({ isActive }) => (isActive ? 'active' : '')}
             >
-              Create Post
+              Написать статью
             </NavLink>
           </li>
         </ul>
